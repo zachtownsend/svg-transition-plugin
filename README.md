@@ -8,11 +8,13 @@ It depends on Snap SVG to work, so call the Snap javascript file before this plu
 
 ### HTML Setup
 Add something like this somewhere in your page:
-$ <div id="transition-container" class="transition-overlay">
-$   <svg preserveAspectRatio="none" viewBox="0 0 80 60" height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" $ id="load-svg">
-$ 			<polygon points="-55.375,60 -45.375,60 0,0 -55.375,0 " id="transition-shape"/>
-$   </svg>
-$ </div>
+```html
+<div id="transition-container" class="transition-overlay">
+  <svg preserveAspectRatio="none" viewBox="0 0 80 60" height="100%" width="100%" xmlns="http://www.w3.org/2000/svg" id="load-svg">
+			<polygon points="-55.375,60 -45.375,60 0,0 -55.375,0 " id="transition-shape"/>
+  </svg>
+</div>
+```
 
 The polygon tag can be any SVG shape, and is the initial state of the transition. You can style this as you please with CSS.
 
