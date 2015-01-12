@@ -19,7 +19,9 @@
 			var active_shape = s.select(getID( settings.shape ));
 			
 			if(settings.initial_state === null) settings.initial_state = get_initial_state(settings.shape[0]);
-			if(settings.steps_out === null) settings.steps_out = settings.initial_state;
+			if(settings.steps_out === null) {
+				settings.steps_out = settings.steps_in.slice(0).reverse().push(initial_state);
+			}
 			
 			function get_initial_state(shape) {
 				function set_attr(attr) {
@@ -89,6 +91,7 @@
 					var isIn = dir === 'in';
 					var steps = isIn ? settings.steps_in : settings.steps_out;
 					var pos = 0;
+					if(isIn) active_shape.attr(settings.initial_state);
 					var nextStep = function(pos) {
 						if(pos > steps.length - 1) {
 							if( callback && typeof callback == 'function' ) {
@@ -96,7 +99,6 @@
 							}
 							return true;
 						}
-						if(isIn) active_shape.attr(settings.initial_state);
 						active_shape.animate(steps[pos], settings.speed, settings.easing, function(){ nextStep(++pos); });
 					}
 					nextStep(pos);
@@ -106,6 +108,5 @@
 			return {
 				play: methods.animate_shape
 			}
-			
 		};
 	})( jQuery );
