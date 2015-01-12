@@ -15,18 +15,17 @@
 				easing: null
 			}, options );
 			
-			var shape_type = settings.shape[0].nodeName;
 			var active_shape = s.select(getID( settings.shape ));
-			
-			if(settings.initial_state === null) settings.initial_state = get_initial_state(settings.shape[0]);
+			if(settings.initial_state === null)	settings.initial_state = get_initial_state(settings.shape[0]);
 			if(settings.steps_out === null) {
-				settings.steps_out = settings.steps_in.slice(0).reverse().push(initial_state);
-			}
-			
+				settings.steps_out = settings.steps_in.slice(0).reverse();
+				settings.steps_out.push(settings.initial_state);
+			}			
 			function get_initial_state(shape) {
 				function set_attr(attr) {
 					return settings.shape.attr(attr);
 				}
+				var shape_type = shape.nodeName;
 				switch(shape_type) {
 					case 'rect' :
 						return {
@@ -64,18 +63,18 @@
 							y2: set_attr('y2')
 						}
 						break;
-						
-					case 'polyline' :
+					
+					case 'path' :
+						console.log('yo');
+						return {
+							d: set_attr('d')
+						}
+						break;
+					
+					default:
 						return {
 							points: set_attr('points')
 						}
-						break;
-						
-					case 'polygon' :
-						return {
-							points: set_attr('points')
-						}
-						break;
 				}
 			}
 			
